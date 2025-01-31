@@ -1,0 +1,33 @@
+name: Extract ZIP File
+
+on: push
+# You can adjust the event that triggers the workflow, like `pull_request`, `schedule`, etc.
+
+jobs:
+  extract-zip:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install unzip package
+      run: sudo apt-get install unzip -y
+
+    - name: Extract ZIP file
+      run: unzip a.zip -d extracted_files
+
+    - name: Commit and push changes
+      env:
+        ACTIONS_TOKEN: ${{ secrets.ACTIONS_TOKEN }}
+      run: |
+        git config --global user.name 'github-actions'
+        git config --global user.email 'github-actions@github.com'
+        git add extracted_files
+        git commit -m 'Add extracted files'
+        git push https://github-actions:${{ secrets.ACTIONS_TOKEN }}@github.com/qweujsakdwqesad/basketrandom.git
