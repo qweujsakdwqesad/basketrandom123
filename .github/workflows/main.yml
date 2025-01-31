@@ -1,27 +1,23 @@
-name: extract a zip file
-on:
-  push:
-    paths:
-    - 'uploads/**.zip'
-  workflow_dispatch:
-    jobs:
-      unzip:
-        runs-on: ubuntu-latest
-        permissions:
-          contents: write
-        steps:
-          - uses: actions/checkout@v4
-          - name:
-            run: |
-              rm -r uploads/extracted
-              filename=$(basename -s .zip *.zip)
-              unzip *.zip
-              rm *.zip
-              mv $filename temp
-              mv temp/out/* .
-              rm -r temp
-              git config --local user.email "github-actions@users.noreply.github.com"
-              git config --local user.name "github-actions"
-              git add .
-              git commit -m "unzip"
-              git push origin main              
+name: Extract ZIP File
+
+on: push
+# You can adjust the event that triggers the workflow, like `pull_request`, `schedule`, etc.
+
+jobs:
+  extract-zip:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install unzip package
+      run: sudo apt-get install unzip -y
+
+    - name: Extract ZIP file
+      run: unzip a.zip -d output_directory
