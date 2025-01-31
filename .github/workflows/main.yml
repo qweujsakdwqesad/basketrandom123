@@ -20,4 +20,4 @@ jobs:
       run: sudo apt-get install unzip -y
 
     - name: Extract ZIP file
-      run: unzip a.zip -d output_directory
+      run: unzip a.zip -d extracted_files
