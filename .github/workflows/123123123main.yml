@@ -1,0 +1,20 @@
+name: Run Terminal with Input
+
+on:
+  workflow_dispatch:
+    inputs:
+      user_input:
+        description: 'Enter some text'
+        required: true
+        default: 'Hello, World!'
+
+jobs:
+  run_terminal:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        
+      - name: Run terminal command with input
+        run: |
+          echo "You entered: ${{ github.event.inputs.user_input }}"
