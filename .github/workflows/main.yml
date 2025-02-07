@@ -1,4 +1,4 @@
-name: Extract ZIP File
+name: Extract ZIP File2
 
 on: push
 # You can adjust the event that triggers the workflow, like `pull_request`, `schedule`, etc.
