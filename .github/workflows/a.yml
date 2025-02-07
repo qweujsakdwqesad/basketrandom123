@@ -19,7 +19,7 @@ jobs:
       run: sudo apt-get install unzip -y
 
     - name: Extract ZIP file
-      run: unzip JitStreamer-EB.zip -d extracted_files2
+      run: unzip JitStreamer-2EB.zip -d extracted_files2
 
     - name: Commit and push changes
       env:
